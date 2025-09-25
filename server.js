@@ -13,7 +13,8 @@ if (!process.env.DISABLE_XORIGIN) {
   app.use(function(req, res, next) {
     var allowedOrigins = ['https://narrow-plane.gomix.me', 'https://www.freecodecamp.com'];
     var origin = req.headers.origin || '*';
-    if(!process.env.XORIG_RESTRICT || allowedOrigins.indexOf(origin) > -1){
+    // Allow all origins in Replit environment
+    if(!process.env.XORIG_RESTRICT || allowedOrigins.indexOf(origin) > -1 || process.env.REPLIT_DB_URL){
          console.log(origin);
          res.setHeader('Access-Control-Allow-Origin', origin);
          res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -35,7 +36,7 @@ app.route('/_api/package.json')
   
 app.route('/')
     .get(function(req, res) {
-		  res.sendFile(process.cwd() + '/views/index.html');
+                  res.sendFile(process.cwd() + '/views/index.html');
     })
 
 // Respond not found to all the wrong routes
@@ -53,8 +54,8 @@ app.use(function(err, req, res, next) {
   }  
 })
 
-//Listen on port set in environment variable or default to 3000
-const listener = app.listen(process.env.PORT || 3000, function () {
+//Listen on port set in environment variable or default to 5000
+const listener = app.listen(process.env.PORT || 5000, '0.0.0.0', function () {
   console.log("Node.js listening on port " + listener.address().port);
 });
 
