@@ -54,8 +54,8 @@ app.use(function(err, req, res, next) {
   }  
 })
 
-//Listen on port set in environment variable or default to 3000
-const listener = app.listen(process.env.PORT || 3000, 'localhost', function () {
+//Listen on port set in environment variable or default to 5000
+const listener = app.listen(process.env.PORT || 5000, 'localhost', function () {
   console.log("Node.js listening on port " + listener.address().port);
 });
 
